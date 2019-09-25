@@ -29,7 +29,8 @@ Game::Game()
 {
 	running_ = Init();
 	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
-	level_ = { 1 };
+	current_level_ = 1;
+	level_ = {current_level_};
 	score_ = 0;
 	game_over_ = false;
 }
@@ -56,19 +57,31 @@ void Game::Run()
 	{
 		if (!game_over_)
 		{
-			timer_->Update();
-			if (timer_->GetDeltaTime() >= 1.0f / FRAMES_PER_SECOND)
+			if (!level_.finished_)
 			{
-				EarlyUpdate();
-				Update();
-				LateUpdate();
-				Render();
+				timer_->Update();
+				if (timer_->GetDeltaTime() >= 1.0f / FRAMES_PER_SECOND)
+				{
+					EarlyUpdate();
+					Update();
+					LateUpdate();
+					Render();
+				}
+			}
+			else
+			{
+				level_.Clean();
+				current_level_++;
+				player.Reset();
+				level_ = { current_level_ };
 			}
 		}
 		else
 		{
-
+			EarlyUpdate();
 		}
+
+		CheckGameOver();
 	}
 
 	window_->Clean();
@@ -144,4 +157,12 @@ void Game::Render()
 void Game::AddScore(int score)
 {
 	score_ += score;
+}
+
+void Game::CheckGameOver()
+{
+	if (player.GetLives() == 0)
+	{
+		game_over_ = true;
+	}
 }

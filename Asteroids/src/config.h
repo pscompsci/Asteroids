@@ -26,35 +26,35 @@
 #pragma warning (disable : 4305)
 #pragma warning (disable: 4244)
 
-const int              SCREEN_WIDTH           = 900;
-const int              SCREEN_HEIGHT          = 700;
-
-const int              FRAMES_PER_SECOND      = 60;
-
-const int              MAX_LEVEL              = 10;
-const int              MIN_START_ASTEROIDS    = 4;
-const int              MAX_START_ASTEROIDS    = 14;
-
-const int              PLAYER_ROTATION_AMOUNT = 8;
-const float			   PLAYER_THRUST_AMOUNT   = 5.0;
-const float            PLAYER_MAX_SPEED       = 10.0f;
-const int              PLAYER_FIRE_DELAY      = 300;
-const float            PLAYER_DRAG            = 0.975;
-const int			   START_LIVES            = 3;
-
-const unsigned int     UFO_FLIGHT_TIME        = 2000;
-const int              UFO_FIRE_DELAY         = 1200;
-
-const int              BULLET_SPEED           = 20.0f;
-const unsigned int     BULLET_FLIGHT_TIME     = 500;
+const int              SCREEN_WIDTH                  = 900;
+const int              SCREEN_HEIGHT                 = 700;
+											         
+const int              FRAMES_PER_SECOND             = 60;
+											         
+const int              PLAYER_ROTATION_AMOUNT        = 8;
+const float			   PLAYER_THRUST_AMOUNT          = 5.0;
+const float            PLAYER_MAX_SPEED              = 10.0f;
+const int              PLAYER_FIRE_DELAY             = 300;
+const float            PLAYER_DRAG                   = 0.975;
+const int			   START_LIVES                   = 3;
+											         
+const unsigned int     UFO_FLIGHT_TIME               = 2000;
+const int              UFO_FIRE_DELAY                = 1200;
+											         
+const int              BULLET_SPEED                  = 20.0f;
+const unsigned int     BULLET_FLIGHT_TIME            = 500;
 
 enum ASTEROID_SIZE     {LARGE = 1, MEDIUM, SMALL};
 
-const double           ASTEROID_BASE_SPEED    = 2.0;
-const unsigned int     ASTEROID_BASE_RADIUS   = 30;
+const int              MAX_LEVEL                     = 10;
+const int              MIN_START_ASTEROIDS           = 4;
+const int              MAX_START_ASTEROIDS           = 14;
+const double           ASTEROID_BASE_SPEED           = 2.0;
+const unsigned int     ASTEROID_BASE_RADIUS          = 30;
+											         
+const int			   LARGE_ASTEROID_SCORE          = 20;
+const int              MEDIUM_ASTEROID_SCORE         = 50;
+const int              SMALL_ASTEROID_SCORE          = 100;
+const int		       UFO_SCORE                     = 200;
 
-const int			   LARGE_ASTEROID_SCORE   = 20;
-const int              MEDIUM_ASTEROID_SCORE  = 50;
-const int              SMALL_ASTEROID_SCORE   = 100;
-const int		       UFO_SCORE              = 200;
 #endif

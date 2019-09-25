@@ -28,7 +28,6 @@
 #include "window.h"
 #include "timer.h"
 #include "player.h"
-#include "game_object.h"
 #include "level.h"
 #include "hud.h"
 
@@ -55,10 +54,12 @@ private:
 	bool game_over_;
 	Timer * timer_;
 	Level level_;
-
 	Player player;
 
+	int current_level_;
 	int score_;
+
+	void CheckGameOver();
 };
 
 #endif

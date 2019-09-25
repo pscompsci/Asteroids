@@ -28,7 +28,7 @@ Level::Level(int level_number)
 {
 	level_number_ = level_number;
 
-	for (int i = 0; i < (MIN_START_ASTEROIDS + 2 * (level_number_ - 1)); i++)
+	for (int i = 0; i < (MIN_START_ASTEROIDS + 2 * (level_number_ - 1)) && i <= MAX_START_ASTEROIDS; i++)
 	{
 		double x = rand() % SCREEN_WIDTH;
 		double y = rand() % SCREEN_HEIGHT;
@@ -42,12 +42,6 @@ Level::Level(int level_number)
 
 Level::~Level()
 {
-}
-
-void Level::AddBullet(Player & player)
-{
-	bullets_.push_back(Bullet{player.GetPosition().x,
-					   player.GetPosition().y, player.GetAngle()});
 }
 
 void Level::Update(Player & player)
@@ -120,6 +114,11 @@ void Level::Update(Player & player)
 			break;
 		}
 	}
+
+	if (asteroids_.size() == 0)
+	{
+		finished_ = true;
+	}
 }
 
 void Level::Render(SDL_Renderer * renderer, Player & player, int score)
@@ -146,4 +145,10 @@ void Level::Render(SDL_Renderer * renderer, Player & player, int score)
 void Level::Clean()
 {
 
+}
+
+void Level::AddBullet(Player & player)
+{
+	bullets_.push_back(Bullet{ player.GetPosition().x,
+					   player.GetPosition().y, player.GetAngle() });
 }
