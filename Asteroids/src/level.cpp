@@ -23,10 +23,13 @@
 #include "level.h"
 
 #include <stdlib.h>
+#include <time.h>
 
 Level::Level(int level_number)
 {
 	level_number_ = level_number;
+	time_t rawtime;
+	srand(time(&rawtime));
 
 	for (int i = 0; i < (MIN_START_ASTEROIDS + 2 * (level_number_ - 1)) && i <= MAX_START_ASTEROIDS; i++)
 	{
@@ -144,7 +147,11 @@ void Level::Render(SDL_Renderer * renderer, Player & player, int score)
 
 void Level::Clean()
 {
-
+	asteroids_.clear();
+	bullets_.clear();
+	ufos_.clear();
+	level_number_ = NULL;
+	finished_ = NULL;
 }
 
 void Level::AddBullet(Player & player)
