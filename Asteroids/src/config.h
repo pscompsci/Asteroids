@@ -31,6 +31,10 @@ const int              SCREEN_HEIGHT          = 700;
 
 const int              FRAMES_PER_SECOND      = 60;
 
+const int              MAX_LEVEL              = 10;
+const int              MIN_START_ASTEROIDS    = 4;
+const int              MAX_START_ASTEROIDS    = 14;
+
 const int              PLAYER_ROTATION_AMOUNT = 8;
 const float			   PLAYER_THRUST_AMOUNT   = 5.0;
 const float            PLAYER_MAX_SPEED       = 10.0f;

@@ -149,6 +149,7 @@
     <ClCompile Include="src\asteroid.cpp" />
     <ClCompile Include="src\bullet.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\level.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\hud.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="src\game.h" />
     <ClInclude Include="src\game_object.h" />
     <ClInclude Include="src\hud.h" />
+    <ClInclude Include="src\level.h" />
     <ClInclude Include="src\ufo.h" />
     <ClInclude Include="src\vec2.h" />
     <ClInclude Include="src\player.h" />

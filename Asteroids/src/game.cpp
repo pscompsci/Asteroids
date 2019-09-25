@@ -220,11 +220,12 @@ void Game::Render()
 		asteroids[i].Render(window_->GetRenderer());
 	}
 
-	/** TIDY THIS UP */
+	/** TIDY THIS UP (MEMORY LEAK)
 	Text score_text(window_->GetRenderer(), "assets/hyperspace.otf", 28, std::to_string(score_), { 255, 255, 255, 255 });
 	score_text.Render(100, 20, window_->GetRenderer());
 	Text lives_text(window_->GetRenderer(), "assets/hyperspace.otf", 16, "Lives: " + std::to_string(player.GetLives()), { 255, 255, 255, 255 });
 	lives_text.Render(100, 50, window_->GetRenderer());
+	*/
 
 	window_->Present();
 }
