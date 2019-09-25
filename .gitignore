@@ -13,6 +13,7 @@
 # Project-specific folders and files
 [Aa]ssets/
 [Dd]ocs/
+[Dd]ependencies/
 
 # Build results
 [Dd]ebug/

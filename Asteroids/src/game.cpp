@@ -29,14 +29,7 @@ Game::Game()
 {
 	running_ = Init();
 	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
-
-	asteroids.push_back(Asteroid{100, 200,  60, ASTEROID_SIZE::LARGE});
-	asteroids.push_back(Asteroid{50,  600, 160, ASTEROID_SIZE::LARGE});
-	asteroids.push_back(Asteroid{800, 100,  30, ASTEROID_SIZE::LARGE});
-	asteroids.push_back(Asteroid{850, 500, 248, ASTEROID_SIZE::LARGE});
-
-	ufos.push_back(UFO{ 0, SCREEN_HEIGHT / 2 });
-
+	level_ = { 1 };
 	score_ = 0;
 	game_over_ = false;
 }
@@ -101,8 +94,7 @@ void Game::HandleInput()
 			{
 				if (player.Fire())
 				{
-					bullets.push_back(Bullet{player.GetPosition().x, 
-						player.GetPosition().y, player.GetAngle()});
+					level_.AddBullet(player);
 				}
 			}
 			break;
@@ -125,74 +117,7 @@ void Game::EarlyUpdate()
 
 void Game::Update()
 {
-	player.Update();
-
-	std::vector<Bullet>::iterator it = bullets.begin();
-	while (it != bullets.end())
-	{
-		if (it->ShouldEnd())
-			it = bullets.erase(it);
-		else
-		{
-			it->Update();
-			++it;
-		}
-	}
-
-	for (int i = 0; i < ufos.size(); i++)
-	{
-		ufos[i].Update();
-	}
-
-
-	for (unsigned int i = 0; i < asteroids.size(); i++)
-	{
-		asteroids[i].Update();
-	}
-
-	for (unsigned int i = 0; i < bullets.size(); i++)
-	{
-		for (unsigned int j = 0; j < asteroids.size(); j++)
-		{
-			if (bullets[i].CollidesWith(&asteroids[j]))
-			{
-				AddScore(asteroids[j].GetPointsValue());
-				if (asteroids[j].GetSize() < 3)
-				{
-					asteroids.push_back(Asteroid{asteroids[j].position.x, 
-						asteroids[j].position.y, 45.0, asteroids[j].GetSize() + 1});
-					asteroids.push_back(Asteroid{asteroids[j].position.x, 
-						asteroids[j].position.y, 135.0, asteroids[j].GetSize() +  1});
-					asteroids.erase(asteroids.begin() + j);
-				}
-				else
-				{
-					asteroids.erase(asteroids.begin() + j);
-				}
-				bullets[i].HitAndShouldDie();
-				break;
-			}
-		}
-		for (unsigned int k = 0; k < ufos.size(); k++)
-		{
-			if (bullets[i].CollidesWith(&ufos[k]))
-			{
-				AddScore(ufos[k].GetPointsValue());
-				ufos.erase(ufos.begin() + k);
-			}
-		}
-	}
-
-	for (unsigned int i = 0; i < asteroids.size(); i++)
-	{
-		if (player.CollidesWith(&asteroids[i]))
-		{
-			asteroids.erase(asteroids.begin() + i);
-			player.LoseLife();
-			player.Reset();
-			break;
-		}
-	}
+	level_.Update(player);
 }
 
 void Game::LateUpdate()
@@ -203,22 +128,8 @@ void Game::LateUpdate()
 void Game::Render()
 {
 	window_->Clear();
-	player.Render(window_->GetRenderer());
-
-	for (unsigned int i = 0; i < bullets.size(); i++)
-	{
-		bullets[i].Render(window_->GetRenderer());
-	}
-
-	for (int i = 0; i < ufos.size(); i++)
-	{
-		ufos[i].Render(window_->GetRenderer());
-	}
-
-	for (unsigned int i = 0; i < asteroids.size(); i++)
-	{
-		asteroids[i].Render(window_->GetRenderer());
-	}
+	
+	level_.Render(window_->GetRenderer(), player, score_);
 
 	/** TIDY THIS UP (MEMORY LEAK)
 	Text score_text(window_->GetRenderer(), "assets/hyperspace.otf", 28, std::to_string(score_), { 255, 255, 255, 255 });

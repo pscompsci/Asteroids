@@ -1,12 +1,3 @@
-#ifndef _ASTEROIDS_GAME_H_
-#define _ASTEROIDS_GAME_H_
-
-#include <vector>
-#include "SDL_ttf.h"
-#include "window.h"
-#include "timer.h"
-#include "player.h"
-#include "ufo.h"
 /**
  * Copyright (c) 2019 Peter Stacey
  *
@@ -29,9 +20,16 @@
  * SOFTWARE.
  */
 
-#include "bullet.h"
-#include "asteroid.h"
+#ifndef _ASTEROIDS_GAME_H_
+#define _ASTEROIDS_GAME_H_
+
+#include <vector>
+#include "SDL_ttf.h"
+#include "window.h"
+#include "timer.h"
+#include "player.h"
 #include "game_object.h"
+#include "level.h"
 #include "hud.h"
 
 // Provides the overall logic layer of the game and controls the update
@@ -56,14 +54,11 @@ private:
 	bool running_;
 	bool game_over_;
 	Timer * timer_;
+	Level level_;
 
 	Player player;
 
 	int score_;
-
-	std::vector<Bullet> bullets;
-	std::vector<Asteroid> asteroids;
-	std::vector<UFO> ufos;
 };
 
 #endif

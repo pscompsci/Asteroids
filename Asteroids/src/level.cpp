@@ -28,34 +28,41 @@ Level::Level(int level_number)
 {
 	level_number_ = level_number;
 
-	for (int i = 0; i < MIN_START_ASTEROIDS + 2 * (level_number_ - 1) && i < MAX_START_ASTEROIDS; i++)
+	for (int i = 0; i < (MIN_START_ASTEROIDS + 2 * (level_number_ - 1)); i++)
 	{
 		double x = rand() % SCREEN_WIDTH;
 		double y = rand() % SCREEN_HEIGHT;
 		double angle = rand() % 300 + 30.0;
 		asteroids_.push_back(Asteroid{x, y, angle, ASTEROID_SIZE::LARGE});
 
-		finished_ = false;
 	}
+	
+	finished_ = false;
 }
 
 Level::~Level()
 {
 }
 
-void Level::Update(Game * game, Player * player)
+void Level::AddBullet(Player & player)
 {
-	player->Update();
+	bullets_.push_back(Bullet{player.GetPosition().x,
+					   player.GetPosition().y, player.GetAngle()});
+}
 
-	std::vector<Bullet>::iterator it = bullets_.begin();
-	while (it != bullets_.end())
+void Level::Update(Player & player)
+{
+	player.Update();
+
+	for (unsigned int i = 0; i < bullets_.size(); i++)
 	{
-		if (it->ShouldEnd())
-			it = bullets_.erase(it);
+		if (bullets_[i].ShouldEnd())
+		{
+			bullets_.erase(bullets_.begin() + i);
+		}
 		else
 		{
-			it->Update();
-			++it;
+			bullets_[i].Update();
 		}
 	}
 
@@ -76,7 +83,7 @@ void Level::Update(Game * game, Player * player)
 		{
 			if (bullets_[i].CollidesWith(&asteroids_[j]))
 			{
-				game->AddScore(asteroids_[j].GetPointsValue());
+				//game->AddScore(asteroids_[j].GetPointsValue());
 				if (asteroids_[j].GetSize() < 3)
 				{
 					asteroids_.push_back(Asteroid{ asteroids_[j].position.x,
@@ -97,7 +104,7 @@ void Level::Update(Game * game, Player * player)
 		{
 			if (bullets_[i].CollidesWith(&ufos_[k]))
 			{
-				game->AddScore(ufos_[k].GetPointsValue());
+				//game->AddScore(ufos_[k].GetPointsValue());
 				ufos_.erase(ufos_.begin() + k);
 			}
 		}
@@ -105,19 +112,19 @@ void Level::Update(Game * game, Player * player)
 
 	for (unsigned int i = 0; i < asteroids_.size(); i++)
 	{
-		if (player->CollidesWith(&asteroids_[i]))
+		if (player.CollidesWith(&asteroids_[i]))
 		{
 			asteroids_.erase(asteroids_.begin() + i);
-			player->LoseLife();
-			player->Reset();
+			player.LoseLife();
+			player.Reset();
 			break;
 		}
 	}
 }
 
-void Level::Render(SDL_Renderer * renderer, Player * player, int score)
+void Level::Render(SDL_Renderer * renderer, Player & player, int score)
 {
-	player->Render(renderer);
+	player.Render(renderer);
 
 	for (unsigned int i = 0; i < bullets_.size(); i++)
 	{

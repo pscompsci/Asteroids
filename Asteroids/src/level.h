@@ -25,7 +25,6 @@
 
 #include <SDL.h>
 #include <vector>
-#include "game.h"
 #include "player.h"
 #include "bullet.h"
 #include "asteroid.h"
@@ -36,10 +35,12 @@
 class Level
 {
 public:
+	Level() {};
 	Level(int level_number);
 	~Level();
-	void Update(Game * game, Player * player);
-	void Render(SDL_Renderer * renderer, Player * player, int score);
+	void AddBullet(Player & player);
+	void Update(Player & player);
+	void Render(SDL_Renderer * renderer, Player & player, int score);
 	void Clean();
 
 private:
