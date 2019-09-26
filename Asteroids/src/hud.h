@@ -23,26 +23,25 @@
 #ifndef ASTEROIDS_HUD_H_
 #define ASTEROIDS_HUD_H_
 
+#include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <string>
 
-// Provides the functionality to render the heads up dislay on the screen.
-class Text
+class HUD
 {
 public:
-	Text(SDL_Renderer* renderer, std::string font_path, int font_size, std::string message, const SDL_Color & color);
-	~Text();
-
-	void Render(int x, int y, SDL_Renderer * renderer) const;
-
-	static SDL_Texture* LoadFont(SDL_Renderer * renderer, const std::string* font_path, int font_size, const std::string* message, const SDL_Color & color);
+	HUD() {};
+	HUD(std::string font_path, int font_size);
+	~HUD();
+	void PrepareText(SDL_Renderer * renderer, std::string message, int value, const SDL_Color& color);
+	void Render(SDL_Renderer* renderer, double x, double y, int score, int lives, const SDL_Color & color);
 
 private:
+	TTF_Font * game_font_;
+	std::string output_;
+	SDL_Surface * text_surface_ = nullptr;
 	SDL_Texture * text_texture_ = nullptr;
-	mutable SDL_Rect text_rect_;
+	SDL_Rect text_rect_;
 };
 
-
 #endif
-

@@ -21,49 +21,50 @@
  */
 
 #include "hud.h"
-
 #include <iostream>
-#include "window.h"
 
-Text::Text(SDL_Renderer* renderer, std::string font_path, int font_size, std::string message, const SDL_Color & color)
+HUD::HUD(std::string font_path, int font_size)
 {
-	text_texture_ = LoadFont(renderer, &font_path, font_size, &message, color);
-	SDL_QueryTexture(text_texture_, nullptr, nullptr, &text_rect_.w, &text_rect_.h);
-}
+	game_font_ = TTF_OpenFont(font_path.c_str(), font_size);
 
-Text::~Text() {}
-
-void Text::Render(int x, int y, SDL_Renderer * renderer) const
-{
-	text_rect_.x = x;
-	text_rect_.y = y;
-	SDL_RenderCopy(renderer, text_texture_, nullptr, &text_rect_);
-}
-
-SDL_Texture* Text::LoadFont(SDL_Renderer * renderer, const std::string * font_path, int font_size, const std::string * message, const SDL_Color & color)
-{
-	TTF_Font* font = TTF_OpenFont(font_path->c_str(), font_size);
-
-	if (font == NULL)
+	if (game_font_ == NULL)
 	{
 		std::cout << "Font loading error: " << TTF_GetError() << std::endl;
 	}
+}
 
-	SDL_Surface * text_surface = TTF_RenderText_Solid(font, message->c_str(), color);
+HUD::~HUD()
+{
+}
 
-	if (text_surface == NULL)
+void HUD::PrepareText(SDL_Renderer * renderer, std::string message, int value, const SDL_Color & color)
+{
+	output_ = message + ": " + std::to_string(value);
+	text_surface_ = TTF_RenderText_Solid(game_font_, output_.c_str(), color);
+
+	if (text_surface_ == NULL)
 	{
 		std::cout << "Surface creation error: " << TTF_GetError() << std::endl;
 	}
 
-	SDL_Texture* text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+	text_texture_ = SDL_CreateTextureFromSurface(renderer, text_surface_);
+	SDL_QueryTexture(text_texture_, nullptr, nullptr, &text_rect_.w, &text_rect_.h);
 
-	if (text_texture == NULL)
+	if (text_texture_ == NULL)
 	{
 		std::cout << "Texture creation error: " << TTF_GetError() << std::endl;
 	}
 
-	SDL_FreeSurface(text_surface);
+	SDL_FreeSurface(text_surface_);
+}
 
-	return text_texture;
+void HUD::Render(SDL_Renderer* renderer, double x, double y, int score, int lives, const SDL_Color & color)
+{
+	text_rect_.x = x;
+	text_rect_.y = y;
+	PrepareText(renderer, "Score", score, color);
+	SDL_RenderCopy(renderer, text_texture_, nullptr, &text_rect_);
+	text_rect_.y = y + 30;
+	PrepareText(renderer, "Lives", lives, color);
+	SDL_RenderCopy(renderer, text_texture_, nullptr, &text_rect_);
 }

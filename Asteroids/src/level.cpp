@@ -25,9 +25,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-Level::Level(int level_number)
+Level::Level(int level_number, int score)
 {
 	level_number_ = level_number;
+	score_ = score;
 	time_t rawtime;
 	srand(time(&rawtime));
 
@@ -80,7 +81,7 @@ void Level::Update(Player & player)
 		{
 			if (bullets_[i].CollidesWith(&asteroids_[j]))
 			{
-				//game->AddScore(asteroids_[j].GetPointsValue());
+				AddScore(asteroids_[j].GetPointsValue());
 				if (asteroids_[j].GetSize() < 3)
 				{
 					asteroids_.push_back(Asteroid{ asteroids_[j].position.x,
@@ -101,7 +102,7 @@ void Level::Update(Player & player)
 		{
 			if (bullets_[i].CollidesWith(&ufos_[k]))
 			{
-				//game->AddScore(ufos_[k].GetPointsValue());
+				AddScore(ufos_[k].GetPointsValue());
 				ufos_.erase(ufos_.begin() + k);
 			}
 		}
@@ -124,7 +125,7 @@ void Level::Update(Player & player)
 	}
 }
 
-void Level::Render(SDL_Renderer * renderer, Player & player, int score)
+void Level::Render(SDL_Renderer * renderer, Player & player)
 {
 	player.Render(renderer);
 
@@ -158,4 +159,14 @@ void Level::AddBullet(Player & player)
 {
 	bullets_.push_back(Bullet{ player.GetPosition().x,
 					   player.GetPosition().y, player.GetAngle() });
+}
+
+void Level::AddScore(int amount)
+{
+	score_ += amount;
+}
+
+int Level::GetScore()
+{
+	return score_;
 }

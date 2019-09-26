@@ -28,6 +28,7 @@
 
 const int              SCREEN_WIDTH                  = 900;
 const int              SCREEN_HEIGHT                 = 700;
+const int              FONT_SIZE                     = 24;
 											         
 const int              FRAMES_PER_SECOND             = 60;
 											         

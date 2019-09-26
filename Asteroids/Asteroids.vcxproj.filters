@@ -54,13 +54,13 @@
     <ClCompile Include="src\asteroid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hud.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ufo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hud.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,13 +92,13 @@
     <ClInclude Include="src\game_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\hud.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\ufo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hud.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

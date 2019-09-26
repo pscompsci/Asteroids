@@ -36,18 +36,22 @@ class Level
 {
 public:
 	Level() {};
-	Level(int level_number);
+	Level(int level_number, int score);
 	~Level();
 	void Update(Player & player);
-	void Render(SDL_Renderer * renderer, Player & player, int score);
+	void Render(SDL_Renderer * renderer, Player & player);
 	void Clean();
 	
 	void AddBullet(Player & player);
+	void AddScore(int amount);
+
+	int GetScore();
 
 	bool finished_;
 
 private:
 	int level_number_;
+	int score_;
 	std::vector<Bullet> bullets_;
 	std::vector<Asteroid> asteroids_;
 	std::vector<UFO> ufos_;

@@ -45,7 +45,6 @@ public:
 	void Update();
 	void LateUpdate();
 	void Render();
-	void AddScore(int score);
 
 private:
 	SDL_Event event_;
@@ -55,9 +54,9 @@ private:
 	Timer * timer_;
 	Level level_;
 	Player player;
+	HUD hud;
 
 	int current_level_;
-	int score_;
 
 	void CheckGameOver();
 };

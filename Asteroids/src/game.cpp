@@ -28,10 +28,10 @@
 Game::Game()
 {
 	running_ = Init();
+	hud = {"assets/hyperspace.otf", FONT_SIZE};
 	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
 	current_level_ = 1;
-	level_ = {current_level_};
-	score_ = 0;
+	level_ = {current_level_, 0};
 	game_over_ = false;
 }
 
@@ -70,10 +70,11 @@ void Game::Run()
 			}
 			else
 			{
+				int current_score = level_.GetScore();
 				level_.Clean();
 				current_level_++;
 				player.Reset();
-				level_ = { current_level_ };
+				level_ = {current_level_, current_score};
 			}
 		}
 		else
@@ -141,22 +142,9 @@ void Game::LateUpdate()
 void Game::Render()
 {
 	window_->Clear();
-	
-	level_.Render(window_->GetRenderer(), player, score_);
-
-	/** TIDY THIS UP (MEMORY LEAK)
-	Text score_text(window_->GetRenderer(), "assets/hyperspace.otf", 28, std::to_string(score_), { 255, 255, 255, 255 });
-	score_text.Render(100, 20, window_->GetRenderer());
-	Text lives_text(window_->GetRenderer(), "assets/hyperspace.otf", 16, "Lives: " + std::to_string(player.GetLives()), { 255, 255, 255, 255 });
-	lives_text.Render(100, 50, window_->GetRenderer());
-	*/
-
+	level_.Render(window_->GetRenderer(), player);
+	hud.Render(window_->GetRenderer(), 40, 20, level_.GetScore(), player.GetLives(), {255,255,255,255});
 	window_->Present();
-}
-
-void Game::AddScore(int score)
-{
-	score_ += score;
 }
 
 void Game::CheckGameOver()

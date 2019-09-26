@@ -149,10 +149,10 @@
     <ClCompile Include="src\asteroid.cpp" />
     <ClCompile Include="src\bullet.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\hud.cpp" />
     <ClCompile Include="src\level.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\player.cpp" />
-    <ClCompile Include="src\hud.cpp" />
     <ClCompile Include="src\timer.cpp" />
     <ClCompile Include="src\ufo.cpp" />
     <ClCompile Include="src\window.cpp" />
