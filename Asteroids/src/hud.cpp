@@ -64,7 +64,9 @@ void HUD::Render(SDL_Renderer* renderer, double x, double y, int score, int live
 	text_rect_.y = y;
 	PrepareText(renderer, "Score", score, color);
 	SDL_RenderCopy(renderer, text_texture_, nullptr, &text_rect_);
+	SDL_DestroyTexture(text_texture_);
 	text_rect_.y = y + 30;
 	PrepareText(renderer, "Lives", lives, color);
 	SDL_RenderCopy(renderer, text_texture_, nullptr, &text_rect_);
+	SDL_DestroyTexture(text_texture_);
 }
