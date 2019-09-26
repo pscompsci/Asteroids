@@ -28,7 +28,7 @@
 Game::Game()
 {
 	running_ = Init();
-	hud = {"assets/hyperspace.otf", FONT_SIZE};
+	hud = {"assets/fonts/hyperspace.otf", FONT_SIZE};
 	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
 	current_level_ = 1;
 	level_ = {current_level_, 0};

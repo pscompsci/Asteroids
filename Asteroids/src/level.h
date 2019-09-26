@@ -25,6 +25,7 @@
 
 #include <SDL.h>
 #include <vector>
+#include "game_object.h"
 #include "player.h"
 #include "bullet.h"
 #include "asteroid.h"
@@ -55,6 +56,8 @@ private:
 	std::vector<Bullet> bullets_;
 	std::vector<Asteroid> asteroids_;
 	std::vector<UFO> ufos_;
+
+	bool UFOAppears();
 };
 
 #endif

@@ -103,6 +103,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\hyperspace.otf" />
+    <Media Include="assets\sounds\bang_medium.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\sounds\fire.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\sounds\saucer_small.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\sounds\thrust.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\hyperspace.otf" />
   </ItemGroup>
 </Project>

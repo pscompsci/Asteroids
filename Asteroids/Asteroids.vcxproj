@@ -172,7 +172,13 @@
     <ClInclude Include="src\window.h" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\hyperspace.otf" />
+    <Font Include="assets\fonts\hyperspace.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\sounds\bang_medium.wav" />
+    <Media Include="assets\sounds\fire.wav" />
+    <Media Include="assets\sounds\saucer_small.wav" />
+    <Media Include="assets\sounds\thrust.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

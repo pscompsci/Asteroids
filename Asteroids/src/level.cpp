@@ -25,6 +25,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <iostream>
+
 Level::Level(int level_number, int score)
 {
 	level_number_ = level_number;
@@ -34,8 +36,8 @@ Level::Level(int level_number, int score)
 
 	for (int i = 0; i < (MIN_START_ASTEROIDS + 2 * (level_number_ - 1)) && i <= MAX_START_ASTEROIDS; i++)
 	{
-		double x = rand() % SCREEN_WIDTH;
-		double y = rand() % SCREEN_HEIGHT;
+		double x = rand() % (int)SCREEN_WIDTH;
+		double y = rand() % (int)SCREEN_HEIGHT;
 		double angle = rand() % 300 + 30.0;
 		asteroids_.push_back(Asteroid{x, y, angle, ASTEROID_SIZE::LARGE});
 
@@ -64,9 +66,22 @@ void Level::Update(Player & player)
 		}
 	}
 
+	if (UFOAppears())
+	{
+		double y = rand() % (int)SCREEN_HEIGHT;
+		ufos_.push_back(UFO{ 0, y });
+	}
+
 	for (int i = 0; i < ufos_.size(); i++)
 	{
-		ufos_[i].Update();
+		if (ufos_[i].ShouldEnd())
+		{
+			ufos_.erase(ufos_.begin() + i);
+		}
+		else
+		{
+			ufos_[i].Update();
+		}
 	}
 
 
@@ -113,6 +128,17 @@ void Level::Update(Player & player)
 		if (player.CollidesWith(&asteroids_[i]))
 		{
 			asteroids_.erase(asteroids_.begin() + i);
+			player.LoseLife();
+			player.Reset();
+			break;
+		}
+	}
+
+	for (unsigned int i = 0; i < ufos_.size(); i++)
+	{
+		if (player.CollidesWith(&ufos_[i]))
+		{
+			ufos_.erase(ufos_.begin() + i);
 			player.LoseLife();
 			player.Reset();
 			break;
@@ -169,4 +195,13 @@ void Level::AddScore(int amount)
 int Level::GetScore()
 {
 	return score_;
+}
+
+bool Level::UFOAppears()
+{
+	double chance = rand();
+	std::cout << chance << std::endl;
+	if (chance < (CHANCE_OF_UFO * level_number_))
+		return true;
+	return false;
 }

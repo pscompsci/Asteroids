@@ -27,6 +27,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+// Creates a heads up dsiplay for the game to dislay lives and score
 class HUD
 {
 public:

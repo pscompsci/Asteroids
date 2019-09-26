@@ -29,7 +29,7 @@
 UFO::UFO(double x, double y)
 {
 	position = {x, y};
-	velocity = {5.0, 0.0};
+	velocity = {UFO_SPEED, 0.0};
 	acceleration = {0.0, 0.0};
 	flight_time_ = UFO_FLIGHT_TIME;
 	start_time_ = SDL_GetTicks();
