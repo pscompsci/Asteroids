@@ -44,6 +44,7 @@ UFO::~UFO()
 void UFO::Update()
 {
 	position.Add(velocity);
+	Fire();
 
 	if (position.y < 0.0)
 		position.y = SCREEN_HEIGHT;

@@ -29,11 +29,11 @@ Game::Game()
 {
 	running_ = Init();
 	
+	hud = {"assets/fonts/hyperspace.otf", FONT_SIZE};
+	
 	sounds = SoundEffects();
 	sounds.LoadResources();
 
-	hud = {"assets/fonts/hyperspace.otf", FONT_SIZE};
-	
 	current_level_ = 1;
 	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
 	level_ = {current_level_, 0, sounds};
@@ -45,7 +45,6 @@ Game::Game()
 Game::~Game()
 {
 	sounds.Clean();
-
 	delete window_;
 	delete timer_;
 

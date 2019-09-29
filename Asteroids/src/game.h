@@ -46,6 +46,7 @@ public:
 	void Update();
 	void LateUpdate();
 	void Render();
+	void AddScore(int amount);
 
 private:
 	SDL_Event event_;
@@ -54,6 +55,8 @@ private:
 	bool game_over_;
 	Timer * timer_;
 	Level level_;
+	int score_;
+	int next_life_at_ = GAIN_LIFE_SCORE;
 
 	Player player;
 	HUD hud;

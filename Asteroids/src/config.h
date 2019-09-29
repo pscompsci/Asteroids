@@ -38,6 +38,7 @@ const float            PLAYER_MAX_SPEED              = 10.0f;
 const int              PLAYER_FIRE_DELAY             = 300;
 const float            PLAYER_DRAG                   = 0.975;
 const int			   START_LIVES                   = 3;
+const int              GAIN_LIFE_SCORE               = 3000;
 		
 const double           CHANCE_OF_UFO                 = 50;
 const double           UFO_SPEED                     = 5.0;
