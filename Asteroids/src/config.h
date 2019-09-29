@@ -26,8 +26,8 @@
 #pragma warning (disable : 4305)
 #pragma warning (disable: 4244)
 
-const double           SCREEN_WIDTH                  = 900.0;
-const double           SCREEN_HEIGHT                 = 700.0;
+const int              SCREEN_WIDTH                  = 900;
+const int              SCREEN_HEIGHT                 = 700;
 const int              FONT_SIZE                     = 24;
 											         
 const int              FRAMES_PER_SECOND             = 60;
@@ -41,7 +41,7 @@ const int			   START_LIVES                   = 3;
 		
 const double           CHANCE_OF_UFO                 = 50;
 const double           UFO_SPEED                     = 5.0;
-const unsigned int     UFO_FLIGHT_TIME               = SCREEN_WIDTH / ((float)FRAMES_PER_SECOND * UFO_SPEED) * 1000;  // Travels once across the screen and disappears
+const unsigned int     UFO_FLIGHT_TIME               = (double)SCREEN_WIDTH / ((double)FRAMES_PER_SECOND * UFO_SPEED) * 1000;  // Travels once across the screen and disappears
 const int              UFO_FIRE_DELAY                = 1200;
 											         
 const int              BULLET_SPEED                  = 20.0f;

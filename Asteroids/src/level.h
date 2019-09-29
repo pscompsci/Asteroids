@@ -30,6 +30,7 @@
 #include "bullet.h"
 #include "asteroid.h"
 #include "ufo.h"
+#include "sound.h"
 #include "config.h"
 
 // Manages progression in the game and controls the game objects of each level. 
@@ -37,7 +38,7 @@ class Level
 {
 public:
 	Level() {};
-	Level(int level_number, int score);
+	Level(int level_number, int score, SoundEffects & sounds);
 	~Level();
 	void Update(Player & player);
 	void Render(SDL_Renderer * renderer, Player & player);
@@ -55,6 +56,7 @@ private:
 	int score_;
 	std::vector<Bullet> bullets_;
 	std::vector<Asteroid> asteroids_;
+	SoundEffects sound_;
 	std::vector<UFO> ufos_;
 
 	bool UFOAppears();

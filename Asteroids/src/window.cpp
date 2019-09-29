@@ -23,6 +23,7 @@
 #include "window.h"
 
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include "config.h"
 
 Window::Window()
@@ -44,6 +45,11 @@ void Window::Init()
 	if (TTF_Init() == -1)
 	{
 		std::cout << "TTF initialization error: " << TTF_GetError();
+	}
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		std::cout << "SDL initialization error: " << Mix_GetError();
 	}
 
 	window_ = SDL_CreateWindow("Asteroids", SDL_WINDOWPOS_CENTERED, 
@@ -78,6 +84,7 @@ void Window::Clean()
 {
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
+	Mix_Quit();
 	TTF_Quit();
 	SDL_Quit();
 

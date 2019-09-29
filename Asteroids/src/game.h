@@ -30,6 +30,7 @@
 #include "player.h"
 #include "level.h"
 #include "hud.h"
+#include "sound.h"
 
 // Provides the overall logic layer of the game and controls the update
 // and render cycle.
@@ -53,8 +54,10 @@ private:
 	bool game_over_;
 	Timer * timer_;
 	Level level_;
+
 	Player player;
 	HUD hud;
+	SoundEffects sounds;
 
 	int current_level_;
 

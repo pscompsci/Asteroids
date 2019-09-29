@@ -86,7 +86,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL2-2.0.5\lib\x86;$(SolutionDir)Dependencies\SDL2_image-2.0.1\lib\x86;$(SolutionDir)Dependencies\SDL2_mixer-2.0.1\lib\x86;$(SolutionDir)Dependencies\SDL2_ttf-2.0.14\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -165,6 +165,7 @@
     <ClInclude Include="src\game_object.h" />
     <ClInclude Include="src\hud.h" />
     <ClInclude Include="src\level.h" />
+    <ClInclude Include="src\sound.h" />
     <ClInclude Include="src\ufo.h" />
     <ClInclude Include="src\vec2.h" />
     <ClInclude Include="src\player.h" />

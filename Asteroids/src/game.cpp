@@ -28,15 +28,24 @@
 Game::Game()
 {
 	running_ = Init();
+	
+	sounds = SoundEffects();
+	sounds.LoadResources();
+
 	hud = {"assets/fonts/hyperspace.otf", FONT_SIZE};
-	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
+	
 	current_level_ = 1;
-	level_ = {current_level_, 0};
+	player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
+	level_ = {current_level_, 0, sounds};
+
+
 	game_over_ = false;
 }
 
 Game::~Game()
 {
+	sounds.Clean();
+
 	delete window_;
 	delete timer_;
 
@@ -74,7 +83,7 @@ void Game::Run()
 				level_.Clean();
 				current_level_++;
 				player.Reset();
-				level_ = {current_level_, current_score};
+				level_ = {current_level_, current_score, sounds};
 			}
 		}
 		else
@@ -99,7 +108,10 @@ void Game::HandleInput()
 			break;
 		case SDL_KEYDOWN:
 			if (event_.key.keysym.sym == SDLK_UP)
+			{
+				sounds.PlayThrust();
 				player.thrust_ = true;
+			}
 			if (event_.key.keysym.sym == SDLK_LEFT)
 				player.rotate_left_ = true;
 			if (event_.key.keysym.sym == SDLK_RIGHT)
@@ -108,6 +120,7 @@ void Game::HandleInput()
 			{
 				if (player.Fire())
 				{
+					sounds.PlayFire();
 					level_.AddBullet(player);
 				}
 			}

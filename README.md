@@ -6,3 +6,4 @@ Implementation of the classic Asteroids game.
 
 - SDL2
 - SDL2_ttf
+- SDL2_mixer
